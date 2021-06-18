@@ -1,3 +1,29 @@
+% ejorapalike v1.0.0
+% Adam Rumpf <https://github.com/adam-rumpf>
+% June 17, 2021
+%
+% BibTeX `ejorapalike' bibliography style, adapted from the `apalike' style,
+% version 0.99a, by Oren Patashnik. The original copyright and documentation
+% are included below. This file is released under the same terms as the
+% original apalike.bst file.
+%
+% This is a lightly modified APA-like bibliography style made in accordance
+% with the European Journal of Operational Research reference style guidelines
+% <https://www.elsevier.com/journals/european-journal-of-operational-research/
+%  0377-2217/guide-for-authors>
+%
+% Specific deviations from the original apalike settings include the following:
+%  (_) Changed `and' to `\&' in lists of multiple authors.
+%  (_) Changed `:' to `, ' between volume number and page numbers.
+%  (_) Added a hyperlinked URL field.
+%  (_) Added a hyperlinked DOI field.
+%  (_) Removed address information from publisher names.
+%  (_) Removed editor information, publisher information, and the words "In"
+%      and "pages" from conference proceedings.
+%  (_) Removed thesis label from theses.
+%
+% =============================================================================
+%
 % BibTeX `apalike' bibliography style (version 0.99a, 8-Dec-10), adapted from
 % the `alpha' style, version 0.99a; for BibTeX version 0.99a.
 %
