@@ -1,5 +1,6 @@
 # auxiliary LaTeX files
 *.aux
+*.bbl
 *.blg
 *.gz
 *.log
