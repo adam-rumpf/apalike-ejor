@@ -13,7 +13,7 @@
 %  0377-2217/guide-for-authors>
 %
 % Specific deviations from the original apalike settings include the following:
-%  (_) Changed `and' to `\&' in lists of multiple authors.
+%  - Changed `and' to `\&' in lists of multiple authors.
 %  (_) Changed `:' to `, ' between volume number and page numbers.
 %  (_) Added a hyperlinked URL field.
 %  (_) Added a hyperlinked DOI field.
@@ -89,6 +89,8 @@ ENTRY
     type
     volume
     year
+	url              % added for ejorapalike
+	doi              % added for ejorapalike
   }
   {}
   { label extra.label sort.label }
@@ -248,7 +250,7 @@ FUNCTION {format.names}
               if$
               t "others" =
                 { " et~al." * }
-                { " and " * t * }
+                { " \& " * t * }   % ampersand for ejorapalike
               if$
             }
           if$
