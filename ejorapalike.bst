@@ -14,7 +14,7 @@
 %
 % Specific deviations from the original apalike settings include the following:
 %  - Changed `and' to `\&' in lists of multiple authors.
-%  (_) Changed `:' to `, ' between volume number and page numbers.
+%  - Changed `:' to `, ' between volume number and page numbers.
 %  (_) Added a hyperlinked URL field.
 %  (_) Added a hyperlinked DOI field.
 %  (_) Removed address information from publisher names.
@@ -348,7 +348,7 @@ FUNCTION {format.bvolume}
         'skip$
         { " of " * series emphasize * }
       if$
-      "volume and number" number either.or.check
+      "volume \& number" number either.or.check   % ampersand for ejorapalike
     }
   if$
 }
@@ -432,7 +432,7 @@ FUNCTION {format.vol.num.pages}
     'skip$
     { duplicate$ empty$
         { pop$ format.pages }
-        { ":" * pages n.dashify * }
+        { ", " * pages n.dashify * }   % replacing colon with comma for ejorapalike
       if$
     }
   if$
@@ -531,12 +531,12 @@ FUNCTION {article}
 FUNCTION {book}
 { output.bibitem
   author empty$
-    { format.editors "author and editor" output.check
+    { format.editors "author \& editor" output.check   % ampersand for ejorapalike
       editor format.key output
     }
     { format.authors output.nonnull
       crossref missing$
-        { "author and editor" editor either.or.check }
+        { "author \& editor" editor either.or.check }   % ampersand for ejorapalike
         'skip$
       if$
     }
@@ -580,12 +580,12 @@ FUNCTION {booklet}
 FUNCTION {inbook}
 { output.bibitem
   author empty$
-    { format.editors "author and editor" output.check
+    { format.editors "author \& editor" output.check   % ampersand for ejorapalike
       editor format.key output
     }
     { format.authors output.nonnull
       crossref missing$
-        { "author and editor" editor either.or.check }
+        { "author \& editor" editor either.or.check }   % ampersand for ejorapalike
         'skip$
       if$
     }
@@ -595,14 +595,14 @@ FUNCTION {inbook}
   format.btitle "title" output.check
   crossref missing$
     { format.bvolume output
-      format.chapter.pages "chapter and pages" output.check
+      format.chapter.pages "chapter \& pages" output.check   % ampersand for ejorapalike
       new.block
       format.number.series output
       new.sentence
       publisher "publisher" output.check
       address output
     }
-    { format.chapter.pages "chapter and pages" output.check
+    { format.chapter.pages "chapter \& pages" output.check   % ampersand for ejorapalike
       new.block
       format.book.crossref output.nonnull
     }
@@ -876,7 +876,7 @@ FUNCTION {format.lab.names}
         'skip$
         { s #2 "{ff }{vv }{ll}{ jj}" format.name$ "others" =
             { " et~al." * }
-            { " and " * s #2 "{vv~}{ll}" format.name$ * }
+            { " \& " * s #2 "{vv~}{ll}" format.name$ * }   % ampersand for ejorapalike
           if$
         }
       if$
