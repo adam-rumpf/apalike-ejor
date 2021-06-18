@@ -1,0 +1,51 @@
+\documentclass{article}
+\usepackage{natbib}
+\usepackage{hyperref}
+
+%==============================================================================
+
+\title{Example Usage of \texttt{apalike-ejor} Bib\TeX\ Style}
+\author{Adam Rumpf\footnote{\url{https://github.com/adam-rumpf}}}
+\date{June 18, 2021}
+
+%==============================================================================
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+This example document demonstrates the usage of the \texttt{apalike-ejor} style, which was developed for formatting bibliographies in accordance with the \textit{European Journal of Operational Research} \href{https://www.elsevier.com/journals/european-journal-of-operational-research/0377-2217/guide-for-authors}{style guide} (as of June 18, 2021).
+
+The Bib\TeX\ style file \texttt{apalike-ejor.bst} is a fork of \texttt{apalike}, originally by Oren Patashnik, and mostly follows the standard APA style. Among other edits hyperlinked URL and DOI fields have been added, which requires the usage of the \texttt{hyperref} package.
+
+In order to use \texttt{apalike-ejor}, make sure that the \texttt{apalike.ejor.bst} file is located somewhere where your compiler can find it, then compile your document with Bib\TeX\ a couple of times followed by \LaTeX\ a couple of times. At minimum the following should be included in your main \texttt{.tex} document:
+
+\begin{verbatim}
+\documentclass{article}
+\usepackage{natbib} % required for inline citations
+\usepackage{hyperref} % required if utilizing url or doi fields
+
+\begin{document}
+%%%
+%%% include the main body of the document here
+%%%
+
+\bibliographystyle{apalike-ejor}
+\bibliography{example-references} % replace with your .bib file
+
+%%%
+%%% include any text following the bibliography here
+%%%
+\end{document}
+\end{verbatim}
+
+\section{Example}
+
+Book: \cite{ahuja1993}
+
+\bibliographystyle{apalike-ejor}
+\bibliography{example-references}
+
+\end{document}
