@@ -1,11 +1,9 @@
 % apalike-ejor v1.0.0
-% Adam Rumpf <https://github.com/adam-rumpf>
-% June 18, 2021
+% Copyright (C) 2021 Adam Rumpf
 %
-% BibTeX `apalike-ejor' bibliography style, adapted from the `apalike' style,
+% BibTeX `apalike-ejor' bibliography style, forked from the `apalike' style,
 % version 0.99a, by Oren Patashnik. The original copyright and documentation
-% are included below. This file is released under the same terms as the
-% original apalike.bst file.
+% are included below.
 %
 % This is a lightly modified APA-like bibliography style made in accordance
 % with the European Journal of Operational Research reference style guidelines
@@ -65,6 +63,8 @@
 %                    THIS `apalike' VERSION DOES NOT WORK WITH BIBTEX 0.98i.
 %    8-dec-10  (OP)  Still version 0.99a, as the code itself was unchanged;
 %                    this release clarified the license.
+%   18-jun-21  (AR)  Modifications made by Adam Rumpf to comply with the EJOR
+%                    bibliography style guide.
 
 ENTRY
   { address
@@ -88,7 +88,7 @@ ENTRY
     series
     title
     type
-	url              % added for apalike-ejor
+    url              % added for apalike-ejor
     volume
     year
   }
