@@ -17,10 +17,9 @@
 %  - Changed `:' to `, ' between volume number and page numbers.
 %  - Added a hyperlinked URL field (requires hyperref).
 %  - Added a hyperlinked DOI field (requires hyperref).
-%  (_) Removed address information from publisher names.
-%  (_) Removed editor information, publisher information, and the words "In"
-%      and "pages" from conference proceedings.
-%  (_) Changed order of book title and page numbers in conference proceedings.
+%  - Removed address information from publisher names.
+%  - Removed editor information, publisher information, and the words "In" and
+%      "pages" from conference proceedings.
 %  - Removed thesis label from theses.
 %
 % =============================================================================
@@ -230,7 +229,7 @@ FUNCTION {format.url}    % url field for apalike-ejor
   if$
 }
 
-FUNCTION {format.urlending}    % formats ending depending on whether doi and/or url fields are present
+FUNCTION {format.urlending}    % formats ending for doi and/or url fields
 {
   doi missing$
     { 
@@ -451,8 +450,8 @@ FUNCTION {format.pages}
 { pages empty$
     { "" }
     { pages multi.page.check
-        { "pages" pages n.dashify tie.or.space.connect }
-        { "page" pages tie.or.space.connect }
+        { pages n.dashify }    %removed "page" and "pages" for apalike-ejor
+        { pages }
       if$
     }
   if$
@@ -473,7 +472,7 @@ FUNCTION {format.vol.num.pages}
     'skip$
     { duplicate$ empty$
         { pop$ format.pages }
-        { ", " * pages n.dashify * }   % replacing colon with comma for apalike-ejor
+        { ", " * pages n.dashify * } % replaced : with , for apalike-ejor
       if$
     }
   if$
@@ -495,15 +494,16 @@ FUNCTION {format.chapter.pages}
   if$
 }
 
-FUNCTION {format.in.ed.booktitle}
-{ booktitle empty$
-    { "" }
-    { editor empty$
-        { "In " booktitle emphasize * }
-        { "In " format.editors * ", " * booktitle emphasize * }
-      if$
-    }
-  if$
+FUNCTION {format.in.ed.booktitle}    % removed editor names for apalike-ejor
+{ %booktitle empty$
+%    { "" }
+%    { editor empty$
+%        { "In " booktitle emphasize * }
+%        { "In " format.editors * ", " * booktitle emphasize * }
+%      if$
+%    }
+%  if$
+  booktitle emphasize
 }
 
 FUNCTION {format.thesis.type}
@@ -572,12 +572,12 @@ FUNCTION {article}
 FUNCTION {book}
 { output.bibitem
   author empty$
-    { format.editors "author \& editor" output.check   % ampersand for apalike-ejor
+    { format.editors "author \& editor" output.check   % & for apalike-ejor
       editor format.key output
     }
     { format.authors output.nonnull
       crossref missing$
-        { "author \& editor" editor either.or.check }   % ampersand for apalike-ejor
+        { "author \& editor" editor either.or.check }   % & for apalike-ejor
         'skip$
       if$
     }
@@ -591,7 +591,7 @@ FUNCTION {book}
       format.number.series output
       new.sentence
       publisher "publisher" output.check
-      address output
+%      address output               removing publisher address for apalike-ejor
     }
     { new.block
       format.book.crossref output.nonnull
@@ -621,12 +621,12 @@ FUNCTION {booklet}
 FUNCTION {inbook}
 { output.bibitem
   author empty$
-    { format.editors "author \& editor" output.check   % ampersand for apalike-ejor
+    { format.editors "author \& editor" output.check   % & for apalike-ejor
       editor format.key output
     }
     { format.authors output.nonnull
       crossref missing$
-        { "author \& editor" editor either.or.check }   % ampersand for apalike-ejor
+        { "author \& editor" editor either.or.check }   % & for apalike-ejor
         'skip$
       if$
     }
@@ -636,14 +636,14 @@ FUNCTION {inbook}
   format.btitle "title" output.check
   crossref missing$
     { format.bvolume output
-      format.chapter.pages "chapter \& pages" output.check   % ampersand for apalike-ejor
+      format.chapter.pages "chapter \& pages" output.check % & for apalike-ejor
       new.block
       format.number.series output
       new.sentence
       publisher "publisher" output.check
-      address output
+%      address output                removing publisher address for apalike-ejor
     }
-    { format.chapter.pages "chapter \& pages" output.check   % ampersand for apalike-ejor
+    { format.chapter.pages "chapter \& pages" output.check % & for apalike-ejor
       new.block
       format.book.crossref output.nonnull
     }
@@ -669,7 +669,7 @@ FUNCTION {incollection}
       format.chapter.pages output
       new.sentence
       publisher "publisher" output.check
-      address output
+%      address output               removing publisher address for apalike-ejor
       format.edition output
     }
     { format.incoll.inproc.crossref output.nonnull
@@ -694,10 +694,10 @@ FUNCTION {inproceedings}
       format.bvolume output
       format.number.series output
       format.pages output
-      address output                                    % for apalike
-      new.sentence                                      % there's no year
-      organization output                               % here so things
-      publisher output                                  % are simpler
+%      address output                  % for apalike % removed for apalike-ejor
+%      new.sentence                                      % there's no year
+%      organization output                               % here so things
+%      publisher output                                  % are simpler
     }
     { format.incoll.inproc.crossref output.nonnull
       format.pages output
@@ -734,7 +734,7 @@ FUNCTION {mastersthesis}
   new.block
   format.title "title" output.check
   new.block
-%  "Master's thesis" format.thesis.type output.nonnull              removing thesis label for apalike-ejor
+%  "Master's thesis" format.thesis.type output.nonnull  remove for apalike-ejor
   school "school" output.check
   address output
   new.block
@@ -764,7 +764,7 @@ FUNCTION {phdthesis}
   new.block
   format.btitle "title" output.check
   new.block
-%  "PhD thesis" format.thesis.type output.nonnull              removing thesis label for apalike-ejor
+%  "PhD thesis" format.thesis.type output.nonnull       remove for apalike-ejor
   school "school" output.check
   address output
   new.block
@@ -774,14 +774,14 @@ FUNCTION {phdthesis}
 
 FUNCTION {proceedings}
 { output.bibitem
-  format.editors output
-  editor format.key output                              % special for
+%  format.editors output                removing editors for apalike-ejor
+%  editor format.key output                              % special for
   output.year.check                                     % apalike
   new.block
   format.btitle "title" output.check
   format.bvolume output
   format.number.series output
-  address output                                % for apalike
+%  address output                      % for apalike % removed for apalike-ejor
   new.sentence                                  % we always output
   organization output                           % a nonempty organization
   publisher output                              % here
@@ -917,7 +917,7 @@ FUNCTION {format.lab.names}
         'skip$
         { s #2 "{ff }{vv }{ll}{ jj}" format.name$ "others" =
             { " et~al." * }
-            { " \& " * s #2 "{vv~}{ll}" format.name$ * }   % ampersand for apalike-ejor
+            { " \& " * s #2 "{vv~}{ll}" format.name$ * }   % & for apalike-ejor
           if$
         }
       if$
