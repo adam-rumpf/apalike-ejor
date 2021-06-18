@@ -72,6 +72,7 @@ ENTRY
     author
     booktitle
     chapter
+	doi              % added for ejorapalike
     edition
     editor
     howpublished
@@ -88,10 +89,9 @@ ENTRY
     series
     title
     type
+	url              % added for ejorapalike
     volume
     year
-	url              % added for ejorapalike
-	doi              % added for ejorapalike
   }
   {}
   { label extra.label sort.label }
@@ -106,22 +106,6 @@ FUNCTION {init.state.consts}
 }
 
 STRINGS { s t }
-
-% DOI field for ejorapalike
-FUNCTION {format.doi}
-{ doi empty$
-    { "" }
-	{ "\url{https://doi.org/" doi "}" }
-  if$
-}
-
-% URL field for ejorapalike
-FUNCTION {format.url}
-{ url empty$
-    { "" }
-	{ "\url{" url "}" }
-  if$
-}
 
 FUNCTION {output.nonnull}
 { 's :=
@@ -190,6 +174,12 @@ FUNCTION {fin.entry}
   newline$
 }
 
+% No-period final entry for ejorapalike
+FUNCTION {fin.npentry}
+{ write$
+  newline$
+}
+
 FUNCTION {new.block}
 { output.state before.all =
     'skip$
@@ -225,6 +215,26 @@ FUNCTION {or}
     'skip$
   if$
 }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% doi field for ejorapalike
+FUNCTION {format.doi}
+{ doi empty$
+    { "" }
+    { "\url{https://doi.org/" doi * "}" * }
+  if$
+}
+
+% url field for ejorapalike
+FUNCTION {format.url}
+{ url empty$
+    { "" }
+    { "\url{" url * "}" * }
+  if$
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 FUNCTION {new.block.checkb}
 { empty$
@@ -524,6 +534,8 @@ FUNCTION {format.incoll.inproc.crossref}
   " \cite{" * crossref * "}" *
 }
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 FUNCTION {article}
 { output.bibitem
   format.authors "author" output.check
@@ -542,7 +554,14 @@ FUNCTION {article}
   if$
   new.block
   note output
-  fin.entry
+  doi missing$              % doi field for ejorapalike
+    { fin.entry
+    }
+	{ new.block
+      format.doi output
+      fin.npentry
+    }
+  if$
 }
 
 FUNCTION {book}
@@ -654,7 +673,14 @@ FUNCTION {incollection}
   if$
   new.block
   note output
-  fin.entry
+  doi missing$              % doi field for ejorapalike
+    { fin.entry
+    }
+	{ new.block
+      format.doi output
+      fin.npentry
+    }
+  if$
 }
 
 FUNCTION {inproceedings}
@@ -681,7 +707,14 @@ FUNCTION {inproceedings}
   if$
   new.block
   note output
-  fin.entry
+  doi missing$              % doi field for ejorapalike
+    { fin.entry
+    }
+	{ new.block
+      format.doi output
+      fin.npentry
+    }
+  if$
 }
 
 FUNCTION {conference} { inproceedings }
@@ -729,7 +762,14 @@ FUNCTION {misc}
   howpublished output
   new.block
   note output
-  fin.entry
+  doi missing$              % doi field for ejorapalike
+    { fin.entry
+    }
+	{ new.block
+      format.doi output
+      fin.npentry
+    }
+  if$
 }
 
 FUNCTION {phdthesis}
@@ -763,7 +803,14 @@ FUNCTION {proceedings}
   publisher output                              % here
   new.block
   note output
-  fin.entry
+  doi missing$              % doi field for ejorapalike
+    { fin.entry
+    }
+	{ new.block
+      format.doi output
+      fin.npentry
+    }
+  if$
 }
 
 FUNCTION {techreport}
