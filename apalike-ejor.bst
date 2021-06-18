@@ -1,8 +1,8 @@
-% ejorapalike v1.0.0
+% apalike-ejor v1.0.0
 % Adam Rumpf <https://github.com/adam-rumpf>
 % June 18, 2021
 %
-% BibTeX `ejorapalike' bibliography style, adapted from the `apalike' style,
+% BibTeX `apalike-ejor' bibliography style, adapted from the `apalike' style,
 % version 0.99a, by Oren Patashnik. The original copyright and documentation
 % are included below. This file is released under the same terms as the
 % original apalike.bst file.
@@ -72,7 +72,7 @@ ENTRY
     author
     booktitle
     chapter
-	doi              % added for ejorapalike
+	doi              % added for apalike-ejor
     edition
     editor
     howpublished
@@ -89,7 +89,7 @@ ENTRY
     series
     title
     type
-	url              % added for ejorapalike
+	url              % added for apalike-ejor
     volume
     year
   }
@@ -174,7 +174,7 @@ FUNCTION {fin.entry}
   newline$
 }
 
-FUNCTION {fin.npentry}    % no-period final entry for ejorapalike
+FUNCTION {fin.npentry}    % no-period final entry for apalike-ejor
 { write$
   newline$
 }
@@ -215,7 +215,7 @@ FUNCTION {or}
   if$
 }
 
-FUNCTION {format.doi}   % doi field for ejorapalike
+FUNCTION {format.doi}   % doi field for apalike-ejor
 { doi empty$
     { "" }
     { "\url{https://doi.org/" doi * "}" * }
@@ -223,7 +223,7 @@ FUNCTION {format.doi}   % doi field for ejorapalike
 }
 
 
-FUNCTION {format.url}    % url field for ejorapalike
+FUNCTION {format.url}    % url field for apalike-ejor
 { url empty$
     { "" }
     { "\url{" url * "}" * }
@@ -291,7 +291,7 @@ FUNCTION {format.names}
               if$
               t "others" =
                 { " et~al." * }
-                { " \& " * t * }   % ampersand for ejorapalike
+                { " \& " * t * }   % ampersand for apalike-ejor
               if$
             }
           if$
@@ -389,7 +389,7 @@ FUNCTION {format.bvolume}
         'skip$
         { " of " * series emphasize * }
       if$
-      "volume \& number" number either.or.check   % ampersand for ejorapalike
+      "volume \& number" number either.or.check   % ampersand for apalike-ejor
     }
   if$
 }
@@ -473,7 +473,7 @@ FUNCTION {format.vol.num.pages}
     'skip$
     { duplicate$ empty$
         { pop$ format.pages }
-        { ", " * pages n.dashify * }   % replacing colon with comma for ejorapalike
+        { ", " * pages n.dashify * }   % replacing colon with comma for apalike-ejor
       if$
     }
   if$
@@ -572,12 +572,12 @@ FUNCTION {article}
 FUNCTION {book}
 { output.bibitem
   author empty$
-    { format.editors "author \& editor" output.check   % ampersand for ejorapalike
+    { format.editors "author \& editor" output.check   % ampersand for apalike-ejor
       editor format.key output
     }
     { format.authors output.nonnull
       crossref missing$
-        { "author \& editor" editor either.or.check }   % ampersand for ejorapalike
+        { "author \& editor" editor either.or.check }   % ampersand for apalike-ejor
         'skip$
       if$
     }
@@ -621,12 +621,12 @@ FUNCTION {booklet}
 FUNCTION {inbook}
 { output.bibitem
   author empty$
-    { format.editors "author \& editor" output.check   % ampersand for ejorapalike
+    { format.editors "author \& editor" output.check   % ampersand for apalike-ejor
       editor format.key output
     }
     { format.authors output.nonnull
       crossref missing$
-        { "author \& editor" editor either.or.check }   % ampersand for ejorapalike
+        { "author \& editor" editor either.or.check }   % ampersand for apalike-ejor
         'skip$
       if$
     }
@@ -636,14 +636,14 @@ FUNCTION {inbook}
   format.btitle "title" output.check
   crossref missing$
     { format.bvolume output
-      format.chapter.pages "chapter \& pages" output.check   % ampersand for ejorapalike
+      format.chapter.pages "chapter \& pages" output.check   % ampersand for apalike-ejor
       new.block
       format.number.series output
       new.sentence
       publisher "publisher" output.check
       address output
     }
-    { format.chapter.pages "chapter \& pages" output.check   % ampersand for ejorapalike
+    { format.chapter.pages "chapter \& pages" output.check   % ampersand for apalike-ejor
       new.block
       format.book.crossref output.nonnull
     }
@@ -734,7 +734,7 @@ FUNCTION {mastersthesis}
   new.block
   format.title "title" output.check
   new.block
-%  "Master's thesis" format.thesis.type output.nonnull              removing thesis label for ejorapalike
+%  "Master's thesis" format.thesis.type output.nonnull              removing thesis label for apalike-ejor
   school "school" output.check
   address output
   new.block
@@ -764,7 +764,7 @@ FUNCTION {phdthesis}
   new.block
   format.btitle "title" output.check
   new.block
-%  "PhD thesis" format.thesis.type output.nonnull              removing thesis label for ejorapalike
+%  "PhD thesis" format.thesis.type output.nonnull              removing thesis label for apalike-ejor
   school "school" output.check
   address output
   new.block
@@ -917,7 +917,7 @@ FUNCTION {format.lab.names}
         'skip$
         { s #2 "{ff }{vv }{ll}{ jj}" format.name$ "others" =
             { " et~al." * }
-            { " \& " * s #2 "{vv~}{ll}" format.name$ * }   % ampersand for ejorapalike
+            { " \& " * s #2 "{vv~}{ll}" format.name$ * }   % ampersand for apalike-ejor
           if$
         }
       if$
