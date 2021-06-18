@@ -20,7 +20,8 @@
 %  (_) Removed address information from publisher names.
 %  (_) Removed editor information, publisher information, and the words "In"
 %      and "pages" from conference proceedings.
-%  (_) Removed thesis label from theses.
+%  (_) Changed order of book title and page numbers in conference proceedings.
+%  - Removed thesis label from theses.
 %
 % =============================================================================
 %
@@ -105,6 +106,22 @@ FUNCTION {init.state.consts}
 }
 
 STRINGS { s t }
+
+% DOI field for ejorapalike
+FUNCTION {format.doi}
+{ doi empty$
+    { "" }
+	{ "\url{https://doi.org/" doi "}" }
+  if$
+}
+
+% URL field for ejorapalike
+FUNCTION {format.url}
+{ url empty$
+    { "" }
+	{ "\url{" url "}" }
+  if$
+}
 
 FUNCTION {output.nonnull}
 { 's :=
@@ -693,7 +710,7 @@ FUNCTION {mastersthesis}
   new.block
   format.title "title" output.check
   new.block
-  "Master's thesis" format.thesis.type output.nonnull
+%  "Master's thesis" format.thesis.type output.nonnull              removing thesis label for ejorapalike
   school "school" output.check
   address output
   new.block
@@ -723,7 +740,7 @@ FUNCTION {phdthesis}
   new.block
   format.btitle "title" output.check
   new.block
-  "PhD thesis" format.thesis.type output.nonnull
+%  "PhD thesis" format.thesis.type output.nonnull              removing thesis label for ejorapalike
   school "school" output.check
   address output
   new.block
