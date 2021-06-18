@@ -1,6 +1,6 @@
 % ejorapalike v1.0.0
 % Adam Rumpf <https://github.com/adam-rumpf>
-% June 17, 2021
+% June 18, 2021
 %
 % BibTeX `ejorapalike' bibliography style, adapted from the `apalike' style,
 % version 0.99a, by Oren Patashnik. The original copyright and documentation
@@ -15,8 +15,8 @@
 % Specific deviations from the original apalike settings include the following:
 %  - Changed `and' to `\&' in lists of multiple authors.
 %  - Changed `:' to `, ' between volume number and page numbers.
-%  (_) Added a hyperlinked URL field.
-%  (_) Added a hyperlinked DOI field.
+%  - Added a hyperlinked URL field (requires hyperref).
+%  - Added a hyperlinked DOI field (requires hyperref).
 %  (_) Removed address information from publisher names.
 %  (_) Removed editor information, publisher information, and the words "In"
 %      and "pages" from conference proceedings.
@@ -174,8 +174,7 @@ FUNCTION {fin.entry}
   newline$
 }
 
-% No-period final entry for ejorapalike
-FUNCTION {fin.npentry}
+FUNCTION {fin.npentry}    % no-period final entry for ejorapalike
 { write$
   newline$
 }
@@ -216,25 +215,40 @@ FUNCTION {or}
   if$
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% doi field for ejorapalike
-FUNCTION {format.doi}
+FUNCTION {format.doi}   % doi field for ejorapalike
 { doi empty$
     { "" }
     { "\url{https://doi.org/" doi * "}" * }
   if$
 }
 
-% url field for ejorapalike
-FUNCTION {format.url}
+
+FUNCTION {format.url}    % url field for ejorapalike
 { url empty$
     { "" }
     { "\url{" url * "}" * }
   if$
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+FUNCTION {format.urlending}    % formats ending depending on whether doi and/or url fields are present
+{
+  doi missing$
+    { 
+      url missing$
+        { fin.entry
+        }
+        { new.block                % use url if no doi
+          format.url output
+          fin.npentry
+        }
+      if$
+    }
+	{ new.block              % use doi if present
+      format.doi output
+      fin.npentry
+    }
+  if$
+}
 
 FUNCTION {new.block.checkb}
 { empty$
@@ -534,8 +548,6 @@ FUNCTION {format.incoll.inproc.crossref}
   " \cite{" * crossref * "}" *
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 FUNCTION {article}
 { output.bibitem
   format.authors "author" output.check
@@ -554,14 +566,7 @@ FUNCTION {article}
   if$
   new.block
   note output
-  doi missing$              % doi field for ejorapalike
-    { fin.entry
-    }
-	{ new.block
-      format.doi output
-      fin.npentry
-    }
-  if$
+  format.urlending              % auto-formatted doi/url ending
 }
 
 FUNCTION {book}
@@ -595,7 +600,7 @@ FUNCTION {book}
   format.edition output
   new.block
   note output
-  fin.entry
+  format.urlending              % auto-formatted doi/url ending
 }
 
 FUNCTION {booklet}
@@ -610,7 +615,7 @@ FUNCTION {booklet}
   address output
   new.block
   note output
-  fin.entry
+  format.urlending              % auto-formatted doi/url ending
 }
 
 FUNCTION {inbook}
@@ -646,7 +651,7 @@ FUNCTION {inbook}
   format.edition output
   new.block
   note output
-  fin.entry
+  format.urlending              % auto-formatted doi/url ending
 }
 
 FUNCTION {incollection}
@@ -673,14 +678,7 @@ FUNCTION {incollection}
   if$
   new.block
   note output
-  doi missing$              % doi field for ejorapalike
-    { fin.entry
-    }
-	{ new.block
-      format.doi output
-      fin.npentry
-    }
-  if$
+  format.urlending              % auto-formatted doi/url ending
 }
 
 FUNCTION {inproceedings}
@@ -707,14 +705,7 @@ FUNCTION {inproceedings}
   if$
   new.block
   note output
-  doi missing$              % doi field for ejorapalike
-    { fin.entry
-    }
-	{ new.block
-      format.doi output
-      fin.npentry
-    }
-  if$
+  format.urlending              % auto-formatted doi/url ending
 }
 
 FUNCTION {conference} { inproceedings }
@@ -732,7 +723,7 @@ FUNCTION {manual}
   format.edition output
   new.block
   note output
-  fin.entry
+  format.urlending              % auto-formatted doi/url ending
 }
 
 FUNCTION {mastersthesis}
@@ -748,7 +739,7 @@ FUNCTION {mastersthesis}
   address output
   new.block
   note output
-  fin.entry
+  format.urlending              % auto-formatted doi/url ending
 }
 
 FUNCTION {misc}
@@ -762,14 +753,7 @@ FUNCTION {misc}
   howpublished output
   new.block
   note output
-  doi missing$              % doi field for ejorapalike
-    { fin.entry
-    }
-	{ new.block
-      format.doi output
-      fin.npentry
-    }
-  if$
+  format.urlending              % auto-formatted doi/url ending
 }
 
 FUNCTION {phdthesis}
@@ -785,7 +769,7 @@ FUNCTION {phdthesis}
   address output
   new.block
   note output
-  fin.entry
+  format.urlending              % auto-formatted doi/url ending
 }
 
 FUNCTION {proceedings}
@@ -803,14 +787,7 @@ FUNCTION {proceedings}
   publisher output                              % here
   new.block
   note output
-  doi missing$              % doi field for ejorapalike
-    { fin.entry
-    }
-	{ new.block
-      format.doi output
-      fin.npentry
-    }
-  if$
+  format.urlending              % auto-formatted doi/url ending
 }
 
 FUNCTION {techreport}
@@ -826,7 +803,7 @@ FUNCTION {techreport}
   address output
   new.block
   note output
-  fin.entry
+  format.urlending              % auto-formatted doi/url ending
 }
 
 FUNCTION {unpublished}
@@ -838,7 +815,7 @@ FUNCTION {unpublished}
   format.title "title" output.check
   new.block
   note "note" output.check
-  fin.entry
+  format.urlending              % auto-formatted doi/url ending
 }
 
 FUNCTION {default.type} { misc }
