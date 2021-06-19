@@ -1,4 +1,4 @@
-% apalike-ejor v1.0.0
+% apalike-ejor v1.1.0
 % Copyright (C) 2021 Adam Rumpf
 %
 % BibTeX `apalike-ejor' bibliography style, forked from the `apalike' style,
@@ -21,6 +21,7 @@
 %  - Removed thesis label from theses.
 %  - Book edition numbers are in parentheses following the title, and
 %    abbreviated "edition" to "ed.".
+%  - Added an optional chapter number for books.
 %
 % =============================================================================
 %
@@ -484,13 +485,13 @@ FUNCTION {format.chapter.pages}
 { chapter empty$
     'format.pages
     { type empty$
-        { "chapter" }
+        { "(Chapter" }                % capitalizing for apalike-ejor
         { type "l" change.case$ }
       if$
       chapter tie.or.space.connect
       pages empty$
-        'skip$
-        { ", " * format.pages * }
+        { ")" * }
+        { ", " * format.pages * ")" * }
       if$
     }
   if$
@@ -597,7 +598,14 @@ FUNCTION {book}
       new.block
       format.number.series output
       new.sentence
-      publisher "publisher" output.check
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      chapter missing$                % adding chapter number for apalike-ejor
+        { publisher output
+        }
+        { publisher " " * format.chapter.pages * output
+        }
+      if$
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %      address output               removing publisher address for apalike-ejor
     }
     { new.block
@@ -754,7 +762,7 @@ FUNCTION {misc}
   author format.key output                              % special for
   output.year.check                                     % apalike
   new.block
-  format.title output
+  format.title emphasize output
   new.block
   howpublished output
   new.block
