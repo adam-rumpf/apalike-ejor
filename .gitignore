@@ -6,3 +6,7 @@
 *.log
 *.out
 *.tmp
+
+# package files
+apalike-ejor/
+*.zip
