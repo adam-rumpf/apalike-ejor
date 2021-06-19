@@ -74,7 +74,7 @@ ENTRY
     author
     booktitle
     chapter
-	doi              % added for apalike-ejor
+    doi              % added for apalike-ejor
     edition
     editor
     howpublished
@@ -598,14 +598,12 @@ FUNCTION {book}
       new.block
       format.number.series output
       new.sentence
-      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
       chapter missing$                % adding chapter number for apalike-ejor
         { publisher output
         }
         { publisher " " * format.chapter.pages * output
         }
       if$
-      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %      address output               removing publisher address for apalike-ejor
     }
     { new.block
