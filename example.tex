@@ -16,9 +16,9 @@
 
 \section{Introduction}
 
-This example document demonstrates the usage of the \texttt{apalike-ejor} style, which was developed for formatting bibliographies in accordance with the \textit{European Journal of Operational Research} \href{https://www.elsevier.com/journals/european-journal-of-operational-research/0377-2217/guide-for-authors}{style guide} (as of June 18, 2021).
+This example document demonstrates the usage of the \texttt{apalike-ejor} style, which was developed for formatting bibliographies in accordance with the \textit{European Journal of Operational Research} \href{https://www.elsevier.com/journals/european-journal-of-operational-research/0377-2217/guide-for-authors}{style guide} (as it appeared on June 18, 2021).
 
-The Bib\TeX\ style file \texttt{apalike-ejor.bst} is a fork of \texttt{apalike}, originally by Oren Patashnik, and mostly follows the standard APA style. Among other edits hyperlinked URL and DOI fields have been added, which requires the usage of the \texttt{hyperref} package.
+The Bib\TeX\ style file \texttt{apalike-ejor.bst} is a fork of \texttt{apalike.bst}, originally by Oren Patashnik, and mostly follows the standard APA style. Among other edits hyperlinked URL and DOI fields have been added, which requires the usage of the \texttt{hyperref} package.
 
 In order to use \texttt{apalike-ejor}, make sure that the \texttt{apalike.ejor.bst} file is located somewhere where your compiler can find it, then compile your document with Bib\TeX\ a couple of times followed by \LaTeX\ a couple of times. At minimum the following should be included in your main \texttt{.tex} document:
 
@@ -41,9 +41,19 @@ In order to use \texttt{apalike-ejor}, make sure that the \texttt{apalike.ejor.b
 \end{document}
 \end{verbatim}
 
-\section{Example}
+\section{Examples}
 
-Book: \cite{ahuja1993}
+\begin{itemize}
+	\item Article: \cite{kinney2005}
+	\item Book: \cite{ahuja1993}
+	\item Conference Proceedings: \cite{cavdaroglu2010}
+	\item Dataset: \cite{kaul2021}
+	\item Thesis: \cite{schmocker2006}
+\end{itemize}
+
+\section*{Acknowledgements}
+
+Thank you to Oren Patashnik for writing the original \texttt{apalike} style file on which this was based. This modification of \texttt{apalike}, and the other files in this package, were largely based on the \texttt{zootaxa-bst} package by Gustavo A.\ Ballen, and seeing the \texttt{zootaxa-bst} repository on \href{https://github.com/gaballench/zootaxa-bst}{GitHub} is what originally gave me the motivation to make this slapdash and kludgy personal tool available to the public. Thank you also to the \href{https://tex.stackexchange.com/}{\LaTeX\ Stack Exchange} community, whose guidance proved invaluable in figuring out the basics of the \texttt{.bst} format, as well as to the \href{https://www.ctan.org/}{CTAN} community for making so much \TeX\ material openly available. Finally thank you to my graduate advisor Hemanshu Kaul, without whom I would never have been in a position to submit a paper to \textit{EJOR} in the first place.
 
 \bibliographystyle{apalike-ejor}
 \bibliography{example-references}
