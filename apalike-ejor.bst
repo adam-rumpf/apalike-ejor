@@ -19,6 +19,8 @@
 %  - Removed editor information, publisher information, and the words "In" and
 %      "pages" from conference proceedings.
 %  - Removed thesis label from theses.
+%  - Book edition numbers are in parentheses following the title, and
+%    abbreviated "edition" to "ed.".
 %
 % =============================================================================
 %
@@ -417,8 +419,8 @@ FUNCTION {format.edition}
 { edition empty$
     { "" }
     { output.state mid.sentence =
-        { edition "l" change.case$ " edition" * }
-        { edition "t" change.case$ " edition" * }
+        { "(" edition * "l" change.case$ " ed.)" * } % changed for apalike-ejor
+        { "(" edition * "t" change.case$ " ed.)" * }
       if$
     }
   if$
@@ -584,7 +586,12 @@ FUNCTION {book}
   if$
   output.year.check                             % special for apalike
   new.block
-  format.btitle "title" output.check
+  edition missing$              % moved and reformatted ed. for apalike-ejor
+    { format.btitle output
+    }
+    { format.btitle " " * format.edition * output
+    }
+  if$
   crossref missing$
     { format.bvolume output
       new.block
@@ -597,7 +604,6 @@ FUNCTION {book}
       format.book.crossref output.nonnull
     }
   if$
-  format.edition output
   new.block
   note output
   format.urlending              % auto-formatted doi/url ending
