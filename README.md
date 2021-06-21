@@ -4,6 +4,8 @@
 
 This is a BibTeX `apalike-ejor` bibliography style, forked from [`apalike`](https://www.bibtex.com/s/bibliography-style-base-apalike/) version 0.99a by Oren Patashnik. The original copyright and documentation are included in the file.
 
+This file is also available from [CTAN](https://www.ctan.org/) as the [`apalike-ejor`](https://www.ctan.org/pkg/apalike-ejor) package.
+
 ## Description
 
 This is a lightly modified APA-like bibliography style made in accordance with the European Journal of Operational Research [reference style guidelines](https://www.elsevier.com/journals/european-journal-of-operational-research/0377-2217/guide-for-authors).
@@ -15,9 +17,11 @@ Specific deviations from the original `apalike` settings include the following:
  * Added a hyperlinked DOI field (requires `hyperref`).
  * Removed address information from publisher names.
  * Removed editor information, publisher information, and the words "In" and "pages" from conference proceedings.
- * Removed "Thesis" label from theses.
+ * Removed "Thesis" label and address from theses.
  * Changed book edition to follow the title in parentheses, and abbreviated "edition".
  * Added chapter and page number support for books.
+ * Added a new dataset field for misc references. If it contains any value besides "0" or "false", the string "[dataset]" is prepended to the reference.
+ * Moved the note field to the end of references (except for unpublished).
 
 ## Installation and Usage
 

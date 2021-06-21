@@ -6,7 +6,7 @@
 
 \title{Example Usage of \texttt{apalike-ejor} \textsc{Bib\TeX} Style}
 \author{Adam Rumpf\footnote{\url{https://github.com/adam-rumpf}}}
-\date{June 20, 2021}
+\date{June 21, 2021}
 
 %==============================================================================
 
@@ -16,9 +16,7 @@
 
 \section{Introduction}
 
-This example document demonstrates the usage of the \texttt{apalike-ejor} style, which was developed for formatting bibliographies in accordance with the \textit{European Journal of Operational Research} \href{https://www.elsevier.com/journals/european-journal-of-operational-research/0377-2217/guide-for-authors}{style guide} (as it appeared on June 18, 2021).
-
-The \textsc{Bib\TeX} style file \texttt{apalike-ejor.bst} is a fork of \texttt{apalike.bst}, originally by Oren Patashnik, and mostly follows the standard APA style. Among other edits hyperlinked URL and DOI fields have been added, which requires the usage of the \texttt{hyperref} package.
+This example document demonstrates the usage of the \texttt{apalike-ejor} style, which was developed for formatting bibliographies in accordance with the \textit{European Journal of Operational Research} \href{https://www.elsevier.com/journals/european-journal-of-operational-research/0377-2217/guide-for-authors}{style guide} (as it appeared in June 2021). The \textsc{Bib\TeX} style file \texttt{apalike-ejor.bst} is a fork of \href{https://www.bibtex.com/s/bibliography-style-base-apalike/}{\texttt{apalike.bst}}, originally by Oren Patashnik, and mostly follows the standard APA style.
 
 In order to use \texttt{apalike-ejor}, make sure that the \texttt{apalike.ejor.bst} file is located somewhere where your compiler can find it, then compile your document with \textsc{Bib\TeX} a couple of times followed by \LaTeX\ a couple of times. At minimum the following should be included in your main \texttt{.tex} file:
 
@@ -41,14 +39,83 @@ In order to use \texttt{apalike-ejor}, make sure that the \texttt{apalike.ejor.b
 \end{document}
 \end{verbatim}
 
+\section{URL and DOI Fields}
+
+Support for \texttt{url} and \texttt{doi} fields has been added to all reference types. Both produce a hyperlinked URL within the reference, which requires the use of the \texttt{hyperref} package. For \texttt{doi} entries only the DOI name, itself, should be included, which will automatically be appended to a \href{https://doi.org/}{\texttt{https://doi.org/}} link. For \texttt{url} entries the entire URL should be included. If both the \texttt{doi} and \texttt{url} fields are filled, only the \texttt{doi} link is created.
+
 \section{Datasets}
 
 The \textit{EJOR} style guide requests that dataset references include ``[dataset]'' at the beginning of the reference (this is only for the manuscript, and does not appear in the published article). Since datasets are usually handled as \texttt{@misc} entries, a new \texttt{dataset} field is recognized by \texttt{apalike-ejor}.
 
-Within a \texttt{.bib} file, including any string besides ``0'' or ``false'' (case-insensitive) in a \texttt{@misc} entry's \texttt{dataset} field results in its reference beginning with the word ``[dataset]''. Including ``0'' or ``false'', or excluding the \texttt{dataset} field, results in a normal \texttt{@misc} citation.
+Within a \texttt{.bib} file, including any string besides ``0'' or ``false'' (case insensitive) in a \texttt{@misc} entry's \texttt{dataset} field results in its reference beginning with the word ``[dataset]''. Including ``0'' or ``false'', or excluding the \texttt{dataset} field, results in a normal \texttt{@misc} citation. The \texttt{kaul2021} and \texttt{rumpf2019} references below provide an example of one dataset and one non-dataset \texttt{@misc} entry.
 
-\section{Examples}
+\section{Example References}
 
+The following entries are included in this repository's example reference file \texttt{example-references.bib}:
+
+\begin{verbatim}
+@book{ahuja1993,
+address = {Englewood Cliffs, NJ},
+author = {Ahuja, R K and Magnanti, T L and Orlin, J B},
+chapter = {16},
+edition = {1st},
+publisher = {Prentice Hall},
+title = {{Network Flows: Theory, Algorithms, and Applications}},
+year = {1993}
+}
+@article{kinney2005,
+author = {Kinney, R and Crucitti, P and Albert, R and Latora, V},
+doi = {10.1140/epjb/e2005-00237-9},
+journal = {European Physical Journal B},
+pages = {101--106},
+title = {{Modeling cascading failures in the North American power
+          grid}},
+volume = {46},
+year = {2005}
+}
+\end{verbatim}
+\newpage
+\begin{verbatim}
+@inproceedings{cavdaroglu2010,
+author = {Cavdaroglu, B and Nurre, S G and Mitchell, J E and
+          Sharkey, T C and Wallace, W A},
+booktitle = {Vulnerability, Uncertainty, and Risk: Analysis,
+             Modeling, and Management},
+editor = {Ayyub, B M},
+pages = {171--179},
+publisher = {American Society of Civil Engineers},
+title = {{Decomposition Methods for Restoring Infrastructure
+          Systems}},
+url = {https://ascelibrary.org/doi/10.1061/41170(400)21},
+year = {2010}
+}
+@misc{kaul2021,
+author = {Kaul, Hemanshu and Rumpf, Adam},
+dataset = {1},
+doi = {10.17632/ptzc7jxhmn.1},
+howpublished = {Mendeley Data, V1},
+title = {{A linear input dependence model for interdependent
+          networks}},
+url = {https://data.mendeley.com/datasets/ptzc7jxhmn/1},
+year = {2021}
+}
+@misc{rumpf2019,
+author = {Rumpf, Adam},
+note = {Accessed May 8, 2020},
+title = {{MCNFLI Computational Trials}},
+url = {https://github.com/adam-rumpf/mcnfli-trials},
+year = {2019}
+}
+@phdthesis{schmocker2006,
+address = {London, England},
+author = {Schm\"ocker, J-D},
+school = {Imperial College London},
+title = {{Dynamic Capacity Constrained Traffic Assignment}},
+year = {2006}
+}
+\end{verbatim}
+
+Their inline references are typeset as follows:
 \begin{itemize}
 	\item Article: \cite{kinney2005}
 	\item Book: \cite{ahuja1993}
@@ -58,11 +125,13 @@ Within a \texttt{.bib} file, including any string besides ``0'' or ``false'' (ca
 	\item Thesis: \cite{schmocker2006}
 \end{itemize}
 
-\section*{Acknowledgements}
-
-Thank you to Oren Patashnik for writing the original \texttt{apalike} style file on which this was based. This modification of \texttt{apalike}, and the other files in this package, were largely based on the \texttt{zootaxa-bst} package by Gustavo A.\ Ballen, and seeing the \texttt{zootaxa-bst} repository on \href{https://github.com/gaballench/zootaxa-bst}{GitHub} is what originally gave me the motivation to make this slapdash and kludgy personal tool available to the public. Thank you also to the \href{https://tex.stackexchange.com/}{\LaTeX\ Stack Exchange} community, whose guidance proved invaluable in figuring out the basics of the \texttt{.bst} format, as well as to the \href{https://www.ctan.org/}{CTAN} community for making so much \TeX\ material openly available. Finally thank you to my graduate advisor Hemanshu Kaul, without whom I would never have been in a position to submit a paper to \textit{EJOR} in the first place.
+See the following section for the complete references resulting from the \texttt{apalike-ejor} style.
 
 \bibliographystyle{apalike-ejor}
 \bibliography{example-references}
+
+\section*{Acknowledgements}
+
+Thank you to Oren Patashnik for writing the original \texttt{apalike} style file on which this was based. This modification of \texttt{apalike}, and the other files in this package, were largely based on the \href{https://www.ctan.org/pkg/zootaxa-bst}{\texttt{zootaxa-bst}} package by Gustavo A.\ Ballen, and seeing the \texttt{zootaxa-bst} repository on \href{https://github.com/gaballench/zootaxa-bst}{GitHub} is what originally gave me the motivation to make this slapdash and kludgy personal tool available to the public. Thank you also to the \href{https://tex.stackexchange.com/}{\LaTeX\ Stack Exchange} community, whose guidance proved invaluable in figuring out the basics of the \texttt{.bst} format, as well as to the \href{https://www.ctan.org/}{CTAN} community for making so much \TeX\ material openly available. Finally thank you to my graduate advisor Hemanshu Kaul, without whom I would never have been in a position to submit a paper to \textit{EJOR} in the first place.
 
 \end{document}

@@ -19,11 +19,11 @@
 %  - Removed address information from publisher names.
 %  - Removed editor information, publisher information, and the words "In" and
 %      "pages" from conference proceedings.
-%  - Removed thesis label from theses.
+%  - Removed thesis label and address from theses.
 %  - Book edition numbers are in parentheses following the title, and
 %    abbreviated "edition" to "ed.".
 %  - Added an optional chapter number for books.
-%  - Added a new "dataset" field for misc references. If it contains any value
+%  - Added a new dataset field for misc references. If it contains any value
 %      besides "0" or "false", the string "[dataset]" is prepended to the
 %      reference.
 %  - Moved the note field to the end of references (except for unpublished).
@@ -253,7 +253,7 @@ FUNCTION {format.urlending}    % formats ending for doi and/or url fields
             { fin.npentry }
             { new.block
               note output
-              fin.entry
+              fin.npentry
             }
           if$
         }
@@ -265,7 +265,7 @@ FUNCTION {format.urlending}    % formats ending for doi and/or url fields
         { fin.npentry }
         { new.block
           note output
-          fin.entry
+          fin.npentry
         }
       if$
     }
@@ -779,7 +779,7 @@ FUNCTION {mastersthesis}
   new.block
 %  "Master's thesis" format.thesis.type output.nonnull  remove for apalike-ejor
   school "school" output.check
-  address output
+%  address output                % removing address for apalike-ejor
   new.block
 %  note output                % note handled in urlending
   format.urlending              % auto-formatted doi/url ending
@@ -813,7 +813,7 @@ FUNCTION {phdthesis}
   new.block
 %  "PhD thesis" format.thesis.type output.nonnull       remove for apalike-ejor
   school "school" output.check
-  address output
+%  address output                % removing address for apalike-ejor
   new.block
 %  note output                % note handled in urlending
   format.urlending              % auto-formatted doi/url ending
