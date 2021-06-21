@@ -73,7 +73,7 @@
 %                    this release clarified the license.
 %   18-jun-21  (AR)  Modifications made by Adam Rumpf to comply with the EJOR
 %                    bibliography style guide.
-%   20-jun-21  (AR)  Modified misc formatting and added dataset field support.
+%   21-jun-21  (AR)  Modified misc formatting and added dataset field support.
 
 ENTRY
   { address

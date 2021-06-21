@@ -1,6 +1,6 @@
 # apalike-ejor
 
-<img src="https://img.shields.io/github/v/release/adam-rumpf/apalike-ejor"/> <img src="https://img.shields.io/github/license/adam-rumpf/apalike-ejor"/>
+<a href="https://www.ctan.org/pkg/apalike-ejor"><img src="https://img.shields.io/ctan/v/apalike-ejor"/></a> <a href="https://github.com/adam-rumpf/apalike-ejor/releases"><img src="https://img.shields.io/github/v/release/adam-rumpf/apalike-ejor"/></a> <a href="https://www.ctan.org/license/lppl1.3c"><img src="https://img.shields.io/github/license/adam-rumpf/apalike-ejor"/></a>
 
 This is a BibTeX `apalike-ejor` bibliography style, forked from [`apalike`](https://www.bibtex.com/s/bibliography-style-base-apalike/) version 0.99a by Oren Patashnik. The original copyright and documentation are included in the file.
 

@@ -14,9 +14,9 @@
 
 \maketitle
 
-\section{Introduction}
+\section*{Introduction}
 
-This example document demonstrates the usage of the \texttt{apalike-ejor} style, which was developed for formatting bibliographies in accordance with the \textit{European Journal of Operational Research} \href{https://www.elsevier.com/journals/european-journal-of-operational-research/0377-2217/guide-for-authors}{style guide} (as it appeared in June 2021). The \textsc{Bib\TeX} style file \texttt{apalike-ejor.bst} is a fork of \href{https://www.bibtex.com/s/bibliography-style-base-apalike/}{\texttt{apalike.bst}}, originally by Oren Patashnik, and mostly follows the standard APA style.
+This example document demonstrates the usage of the \href{https://www.ctan.org/pkg/apalike-ejor}{\texttt{apalike-ejor}} style, which was developed for formatting bibliographies in accordance with the \textit{European Journal of Operational Research} \href{https://www.elsevier.com/journals/european-journal-of-operational-research/0377-2217/guide-for-authors}{style guide} (as it appeared in June 2021). The \textsc{Bib\TeX} style file \texttt{apalike-ejor.bst} is a fork of \href{https://www.bibtex.com/s/bibliography-style-base-apalike/}{\texttt{apalike.bst}}, originally by Oren Patashnik, and mostly follows standard \href{https://apastyle.apa.org/style-grammar-guidelines/references/examples}{APA style}.
 
 In order to use \texttt{apalike-ejor}, make sure that the \texttt{apalike.ejor.bst} file is located somewhere where your compiler can find it, then compile your document with \textsc{Bib\TeX} a couple of times followed by \LaTeX\ a couple of times. At minimum the following should be included in your main \texttt{.tex} file:
 
@@ -39,17 +39,17 @@ In order to use \texttt{apalike-ejor}, make sure that the \texttt{apalike.ejor.b
 \end{document}
 \end{verbatim}
 
-\section{URL and DOI Fields}
+\section*{URL and DOI Fields}
 
-Support for \texttt{url} and \texttt{doi} fields has been added to all reference types. Both produce a hyperlinked URL within the reference, which requires the use of the \texttt{hyperref} package. For \texttt{doi} entries only the DOI name, itself, should be included, which will automatically be appended to a \href{https://doi.org/}{\texttt{https://doi.org/}} link. For \texttt{url} entries the entire URL should be included. If both the \texttt{doi} and \texttt{url} fields are filled, only the \texttt{doi} link is created.
+Support for \texttt{url} and \texttt{doi} fields has been added for all reference types. Both produce a hyperlinked URL within the reference, which requires the use of the \href{https://ctan.org/pkg/hyperref}{\texttt{hyperref}} package. For \texttt{doi} entries only the DOI name, itself, should be included, which will automatically be appended to a \url{https://doi.org/} link. For \texttt{url} entries the entire URL should be included. If both the \texttt{doi} and \texttt{url} fields are filled, only the \texttt{doi} link is created.
 
-\section{Datasets}
+\section*{Datasets}
 
 The \textit{EJOR} style guide requests that dataset references include ``[dataset]'' at the beginning of the reference (this is only for the manuscript, and does not appear in the published article). Since datasets are usually handled as \texttt{@misc} entries, a new \texttt{dataset} field is recognized by \texttt{apalike-ejor}.
 
 Within a \texttt{.bib} file, including any string besides ``0'' or ``false'' (case insensitive) in a \texttt{@misc} entry's \texttt{dataset} field results in its reference beginning with the word ``[dataset]''. Including ``0'' or ``false'', or excluding the \texttt{dataset} field, results in a normal \texttt{@misc} citation. The \texttt{kaul2021} and \texttt{rumpf2019} references below provide an example of one dataset and one non-dataset \texttt{@misc} entry.
 
-\section{Example References}
+\section*{Example References}
 
 The following entries are included in this repository's example reference file \texttt{example-references.bib}:
 
@@ -115,17 +115,21 @@ year = {2006}
 }
 \end{verbatim}
 
-Their inline references are typeset as follows:
-\begin{itemize}
-	\item Article: \cite{kinney2005}
-	\item Book: \cite{ahuja1993}
-	\item Conference Proceedings: \cite{cavdaroglu2010}
-	\item Dataset: \cite{kaul2021}
-	\item Web: \cite{rumpf2019}
-	\item Thesis: \cite{schmocker2006}
-\end{itemize}
+\noindent Their inline references are typeset as follows:\\
 
-See the following section for the complete references resulting from the \texttt{apalike-ejor} style.
+Article: \cite{kinney2005}
+
+Book: \cite{ahuja1993}
+
+Conference Proceedings: \cite{cavdaroglu2010}
+
+Dataset: \cite{kaul2021}
+
+Web: \cite{rumpf2019}
+
+Thesis: \cite{schmocker2006}
+
+Applying the \texttt{apalike-ejor} style results in the following References section:
 
 \bibliographystyle{apalike-ejor}
 \bibliography{example-references}
