@@ -1,4 +1,4 @@
-# `apalike-ejor`
+# apalike-ejor
 
 <img src="https://img.shields.io/github/v/release/adam-rumpf/apalike-ejor"/> <img src="https://img.shields.io/github/license/adam-rumpf/apalike-ejor"/>
 

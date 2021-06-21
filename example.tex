@@ -4,9 +4,9 @@
 
 %==============================================================================
 
-\title{Example Usage of \texttt{apalike-ejor} Bib\TeX\ Style}
+\title{Example Usage of \texttt{apalike-ejor} \textsc{Bib\TeX} Style}
 \author{Adam Rumpf\footnote{\url{https://github.com/adam-rumpf}}}
-\date{June 19, 2021}
+\date{June 20, 2021}
 
 %==============================================================================
 
@@ -18,9 +18,9 @@
 
 This example document demonstrates the usage of the \texttt{apalike-ejor} style, which was developed for formatting bibliographies in accordance with the \textit{European Journal of Operational Research} \href{https://www.elsevier.com/journals/european-journal-of-operational-research/0377-2217/guide-for-authors}{style guide} (as it appeared on June 18, 2021).
 
-The Bib\TeX\ style file \texttt{apalike-ejor.bst} is a fork of \texttt{apalike.bst}, originally by Oren Patashnik, and mostly follows the standard APA style. Among other edits hyperlinked URL and DOI fields have been added, which requires the usage of the \texttt{hyperref} package.
+The \textsc{Bib\TeX} style file \texttt{apalike-ejor.bst} is a fork of \texttt{apalike.bst}, originally by Oren Patashnik, and mostly follows the standard APA style. Among other edits hyperlinked URL and DOI fields have been added, which requires the usage of the \texttt{hyperref} package.
 
-In order to use \texttt{apalike-ejor}, make sure that the \texttt{apalike.ejor.bst} file is located somewhere where your compiler can find it, then compile your document with Bib\TeX\ a couple of times followed by \LaTeX\ a couple of times. At minimum the following should be included in your main \texttt{.tex} file:
+In order to use \texttt{apalike-ejor}, make sure that the \texttt{apalike.ejor.bst} file is located somewhere where your compiler can find it, then compile your document with \textsc{Bib\TeX} a couple of times followed by \LaTeX\ a couple of times. At minimum the following should be included in your main \texttt{.tex} file:
 
 \begin{verbatim}
 \documentclass{article}
@@ -41,6 +41,12 @@ In order to use \texttt{apalike-ejor}, make sure that the \texttt{apalike.ejor.b
 \end{document}
 \end{verbatim}
 
+\section{Datasets}
+
+The \textit{EJOR} style guide requests that dataset references include ``[dataset]'' at the beginning of the reference (this is only for the manuscript, and does not appear in the published article). Since datasets are usually handled as \texttt{@misc} entries, a new \texttt{dataset} field is recognized by \texttt{apalike-ejor}.
+
+Within a \texttt{.bib} file, including any string besides ``0'' or ``false'' (case-insensitive) in a \texttt{@misc} entry's \texttt{dataset} field results in its reference beginning with the word ``[dataset]''. Including ``0'' or ``false'', or excluding the \texttt{dataset} field, results in a normal \texttt{@misc} citation.
+
 \section{Examples}
 
 \begin{itemize}
@@ -48,6 +54,7 @@ In order to use \texttt{apalike-ejor}, make sure that the \texttt{apalike.ejor.b
 	\item Book: \cite{ahuja1993}
 	\item Conference Proceedings: \cite{cavdaroglu2010}
 	\item Dataset: \cite{kaul2021}
+	\item Web: \cite{rumpf2019}
 	\item Thesis: \cite{schmocker2006}
 \end{itemize}
 

@@ -1,4 +1,4 @@
-% apalike-ejor v1.1.0
+% apalike-ejor v1.2.0
 % Copyright (C) 2021 Adam Rumpf
 %
 % BibTeX `apalike-ejor' bibliography style, forked from the `apalike' style,
@@ -14,7 +14,8 @@
 %  - Changed `and' to `\&' in lists of multiple authors.
 %  - Changed `:' to `, ' between volume number and page numbers.
 %  - Added a hyperlinked URL field (requires hyperref).
-%  - Added a hyperlinked DOI field (requires hyperref).
+%  - Added a hyperlinked DOI field (requires hyperref). If both the DOI and
+%      URL fields are present, the DOI is preferred.
 %  - Removed address information from publisher names.
 %  - Removed editor information, publisher information, and the words "In" and
 %      "pages" from conference proceedings.
@@ -22,6 +23,10 @@
 %  - Book edition numbers are in parentheses following the title, and
 %    abbreviated "edition" to "ed.".
 %  - Added an optional chapter number for books.
+%  - Added a new "dataset" field for misc references. If it contains any value
+%      besides "0" or "false", the string "[dataset]" is prepended to the
+%      reference.
+%  - Moved the note field to the end of misc references.
 %
 % =============================================================================
 %
@@ -74,6 +79,7 @@ ENTRY
     author
     booktitle
     chapter
+    dataset                % unique field added for apalike-ejor
     doi              % added for apalike-ejor
     edition
     editor
@@ -245,7 +251,7 @@ FUNCTION {format.urlending}    % formats ending for doi and/or url fields
         }
       if$
     }
-	{ new.block              % use doi if present
+    { new.block              % use doi if present
       format.doi output
       fin.npentry
     }
@@ -551,6 +557,17 @@ FUNCTION {format.incoll.inproc.crossref}
   " \cite{" * crossref * "}" *
 }
 
+FUNCTION {format.dataset}                % unique "dataset" field for apalike
+{ dataset empty$      % prints "[dataset]" for any value besides "0" or "false"
+    { "" }
+    { dataset "0" = dataset "l" change.case$ "false" = or
+      { "" }
+      { "[dataset]" }
+      if$
+    }
+  if$
+}
+
 FUNCTION {article}
 { output.bibitem
   format.authors "author" output.check
@@ -756,6 +773,10 @@ FUNCTION {mastersthesis}
 
 FUNCTION {misc}
 { output.bibitem
+  format.dataset "" =                 % unique "dataset" field for apalike-ejor
+    { skip$ }
+    { format.dataset " " * write$ }
+  if$
   format.authors output
   author format.key output                              % special for
   output.year.check                                     % apalike
