@@ -26,7 +26,7 @@
 %  - Added a new "dataset" field for misc references. If it contains any value
 %      besides "0" or "false", the string "[dataset]" is prepended to the
 %      reference.
-%  - Moved the note field to the end of misc references.
+%  - Moved the note field to the end of references (except for unpublished).
 %
 % =============================================================================
 %
@@ -73,6 +73,7 @@
 %                    this release clarified the license.
 %   18-jun-21  (AR)  Modifications made by Adam Rumpf to comply with the EJOR
 %                    bibliography style guide.
+%   20-jun-21  (AR)  Modified misc formatting and added dataset field support.
 
 ENTRY
   { address
@@ -243,17 +244,30 @@ FUNCTION {format.urlending}    % formats ending for doi and/or url fields
   doi missing$
     { 
       url missing$
-        { fin.entry
+        { note output
+          fin.entry
         }
         { new.block                % use url if no doi
           format.url output
-          fin.npentry
+          note missing$
+            { fin.npentry }
+            { new.block
+              note output
+              fin.entry
+            }
+          if$
         }
       if$
     }
     { new.block              % use doi if present
       format.doi output
-      fin.npentry
+      note missing$
+        { fin.npentry }
+        { new.block
+          note output
+          fin.entry
+        }
+      if$
     }
   if$
 }
@@ -585,7 +599,7 @@ FUNCTION {article}
     }
   if$
   new.block
-  note output
+%  note output                % note handled in urlending
   format.urlending              % auto-formatted doi/url ending
 }
 
@@ -628,7 +642,7 @@ FUNCTION {book}
     }
   if$
   new.block
-  note output
+%  note output                % note handled in urlending
   format.urlending              % auto-formatted doi/url ending
 }
 
@@ -643,7 +657,7 @@ FUNCTION {booklet}
   howpublished output
   address output
   new.block
-  note output
+%  note output                % note handled in urlending
   format.urlending              % auto-formatted doi/url ending
 }
 
@@ -679,7 +693,7 @@ FUNCTION {inbook}
   if$
   format.edition output
   new.block
-  note output
+%  note output                % note handled in urlending
   format.urlending              % auto-formatted doi/url ending
 }
 
@@ -706,7 +720,7 @@ FUNCTION {incollection}
     }
   if$
   new.block
-  note output
+%  note output                % note handled in urlending
   format.urlending              % auto-formatted doi/url ending
 }
 
@@ -733,7 +747,7 @@ FUNCTION {inproceedings}
     }
   if$
   new.block
-  note output
+%  note output                % note handled in urlending
   format.urlending              % auto-formatted doi/url ending
 }
 
@@ -751,7 +765,7 @@ FUNCTION {manual}
   address output
   format.edition output
   new.block
-  note output
+%  note output                % note handled in urlending
   format.urlending              % auto-formatted doi/url ending
 }
 
@@ -767,7 +781,7 @@ FUNCTION {mastersthesis}
   school "school" output.check
   address output
   new.block
-  note output
+%  note output                % note handled in urlending
   format.urlending              % auto-formatted doi/url ending
 }
 
@@ -785,7 +799,7 @@ FUNCTION {misc}
   new.block
   howpublished output
   new.block
-  note output
+%  note output                % note handled in urlending
   format.urlending              % auto-formatted doi/url ending
 }
 
@@ -801,7 +815,7 @@ FUNCTION {phdthesis}
   school "school" output.check
   address output
   new.block
-  note output
+%  note output                % note handled in urlending
   format.urlending              % auto-formatted doi/url ending
 }
 
@@ -819,7 +833,7 @@ FUNCTION {proceedings}
   organization output                           % a nonempty organization
   publisher output                              % here
   new.block
-  note output
+%  note output                % note handled in urlending
   format.urlending              % auto-formatted doi/url ending
 }
 
@@ -835,7 +849,7 @@ FUNCTION {techreport}
   institution "institution" output.check
   address output
   new.block
-  note output
+%  note output                % note handled in urlending
   format.urlending              % auto-formatted doi/url ending
 }
 
